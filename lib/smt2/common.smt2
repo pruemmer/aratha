@@ -4,9 +4,6 @@
 ; "js." prepended. The generally return values of an SMT-LIB sort, and may
 ; need to be wrapped with Val.
 
-(define-sort Properties () (Array String MaybeVal))
-(declare-fun GetProperties (Int) Properties)
-
 (define-fun NumberToString ((x Int)) String (ite (>= x 0) (int.to.str x) (str.++ "-" (int.to.str (- x)))))
 
 (define-fun js.ToString ((x Val)) String
@@ -54,8 +51,6 @@
     (ite (is-Boolean x) "boolean"
     (ite (is-Str x) "string"
     "object"))))) ; NOTE: typeof null === "object"
-
-(define-fun EmptyObject () Properties ((as const Properties) Nothing))
 
 (define-fun StringToObject ((s String)) Properties (store EmptyObject "length" (Just (Num (str.len s)))))
 (define-fun NumberToObject ((x Int)) Properties EmptyObject)
