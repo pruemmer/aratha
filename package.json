@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "analyze": "jalangi2 --analysis ."
+    "analyze": "jalangi2 --analysis ./index.js  "
   },
   "repository": {
     "type": "git",
