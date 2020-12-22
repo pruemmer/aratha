@@ -20,3 +20,9 @@
     (let ((nx (bv2nat x)))
         (ite (>= nx 2147483648) (- nx 4294967296) nx)))
 (define-fun Int32ToUInt ((x (_ BitVec 32))) Int (bv2nat x))
+
+(define-sort Properties () (Array String MaybeVal))
+(declare-fun GetProperties (Int) Properties)
+
+(define-fun EmptyObject () Properties ((as const Properties) Nothing))
+
