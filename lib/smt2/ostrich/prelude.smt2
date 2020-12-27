@@ -23,4 +23,4 @@
 (define-sort Properties () (Array String MaybeVal))
 (declare-fun GetProperties (Int) Properties)
 
-(define-fun EmptyObject () Properties ((as const Properties) Nothing))
+(declare-fun EmptyObject () Properties) ; not supported: ((as const Properties) Nothing))
