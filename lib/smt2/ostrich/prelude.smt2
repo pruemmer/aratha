@@ -17,8 +17,8 @@
     (Nothing)
     (Just (just Val))))
 
-(define-fun Int32ToInt  ((x (_ BitVec 32))) Int (bv2int x))
-(define-fun Int32ToUInt ((x (_ BitVec 32))) Int (bv2nat x))
+;(define-fun Int32ToInt  ((x (_ BitVec 32))) Int (bv2int x))
+;(define-fun Int32ToUInt ((x (_ BitVec 32))) Int (bv2nat x))
 
 (define-sort Properties () (Array String MaybeVal))
 (declare-fun GetProperties (Int) Properties)
