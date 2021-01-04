@@ -1,13 +1,9 @@
+var value = J$.readString();
 
-var constructorFn = J$.readString();
-function test(name){
-//   if (name.match(/^(.+)(?:-(.+))?$/)  && name.match(/^(.+?)(?:-(.+?))?$/)[1] !=='') {
-//     throw new Error('Incorrectly formatted service names');
-//  }
-  var b=name.match(/foo*/);
-  if(b && b[1] === "a")
-    console.log(b[1]);
-  else
-    console.log(2);
+function fun(value)
+{ 
+   var value1 = value.replace(/\\([\\\]])/g, '$1');
+   if(/\\\\/.test(value1)) console.log("1");
 }
-test(constructorFn);
+
+fun(value);
