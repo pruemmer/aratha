@@ -83,7 +83,6 @@
 
 ; Relational operators
 (define-fun js.=== ((x Val) (y Val)) Bool (= x y))
-
 (define-fun js.!== ((x Val) (y Val)) Bool (not (js.=== x y)))
 
 (define-fun js.== ((x Val) (y Val)) Bool

@@ -10,12 +10,8 @@
     (Str (str String))
     (Num (num Int))
     (Obj (id Int))))
-
 (declare-datatype MaybeVal (
     (Nothing)
     (Just (just Val))))
 
-(define-sort Properties () (Array String MaybeVal))
-(declare-fun GetProperties (Int) Properties)
 
-(declare-fun EmptyObject () Properties) 
