@@ -1,8 +1,7 @@
 var value1 = J$.readString();
 var value2 = J$.readString();
 function escapeAttribute(value1,value2) {
-    var a = /^(?:async\s+)?(?:function)?\s*\w*\s*\(\s*([^)]+)\s*\)(?:\s*\{)/g;
-    if(a.test(value1)){
+    if(/\"/.test(value1)){
         console.log(0);
     }else if(value1 === value2)
         console.log(1);

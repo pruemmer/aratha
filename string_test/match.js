@@ -1,10 +1,9 @@
 a = J$.readString()
 
 function test_match(a) {
-    var FN_ARGS = /(hhh|cccc)(aaaa|bbb)/;
-    b = a.match(FN_ARGS);
-    if(b !== null)
-        console.log(b);
+    b = a.match(/(foo)*/);
+    if(b !== null && b[0] === "foo")
+        console.log(b[0]);
     else
         console.log(1);
 }
