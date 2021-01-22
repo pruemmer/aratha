@@ -15,7 +15,7 @@ from this directory.
 ### OSTRICH_PATH
 
 The default solver is G-Strings. 
-Alternatively, you can use an SMT solver by setting `OSTRICH_PATH` to the path to ostrich.
+Alternatively, you can use an SMT solver by setting environment variables `SOLVER` to "ostrich" and `OSTRICH_PATH` to the path to ostrich.
 
 ## Tests
 The tests are written with [Mocha](https://mochajs.org/). To run them, run
