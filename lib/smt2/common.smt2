@@ -67,3 +67,11 @@
         (ite (is-Str x) (= ny (js.ToNumber x))
         false)))
     false))))))))
+(define-fun js.!= ((x Val) (y Val)) Bool (not (js.== x y)))
+(define-fun js.ToBoolean ((x Val)) Bool
+    (ite (is-Num x) (distinct (num x) 0)
+    (ite (is-undefined x) false
+    (ite (is-null x) false
+    (ite (is-Boolean x) (bool x)
+    (ite (is-Str x) (distinct (str x) "")
+    true))))))
