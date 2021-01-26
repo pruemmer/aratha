@@ -67,3 +67,4 @@
         (ite (is-Str x) (= ny (js.ToNumber x))
         false)))
     false))))))))
+(define-fun js.!= ((x Val) (y Val)) Bool (not (js.== x y)))
