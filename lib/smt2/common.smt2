@@ -75,3 +75,54 @@
     (ite (is-Boolean x) (bool x)
     (ite (is-Str x) (distinct (str x) "")
     true))))))
+
+(define-fun min ((x Int) (y Int)) Int (ite (< x y) x y))
+(define-fun max ((x Int) (y Int)) Int (ite (> x y) x y))
+(define-fun clamp ((x Int) (lower Int) (upper Int)) Int (min (max x lower) upper))
+(define-fun js.ToInteger ((x Val)) Int (js.ToNumber x))
+
+(define-fun substring ((x String) (start Int) (end Int)) String (str.substr x start (- end start)))
+(define-fun js.substring ((x String) (start Int) (end Val)) String
+    (let ((len (str.len x)))
+        (let (
+            (fs (clamp start 0 len))
+            (fe (clamp (ite (is-undefined end) len (js.ToInteger end)) 0 len)))
+                (substring x (min fs fe) (max fs fe)))))
+
+(define-fun js.substr ((x String) (start Int) (len Val)) String
+    (ite (>= start (str.len x))
+        ""
+        (let ((sp (ite (>= start 0) start (max 0 (+ (str.len x) start)))))
+            (let ((remlen (- (str.len x) sp)))
+                (str.substr x sp (ite (is-undefined len) remlen (clamp (js.ToInteger len) 0 remlen)))))))
+
+(define-fun js.slice ((x String) (start Int) (end Val)) String
+    (let ((len (str.len x)))
+        (let ((ie (ite (is-undefined end) len (js.ToInteger end))))
+            (let (
+                (from (ite (< start 0) (max 0 (+ len start)) (min start len)))
+                (to (ite (< ie 0) (max 0 (+ len ie)) (min ie len))))
+                    (str.substr x from (max 0 (- to from)))))))
+
+(define-fun Split1 ((x String) (delim String)) Properties
+    (let ((n (str.indexof x delim 0)))
+        (ite (= n (- 1))
+            (store EmptyObject "0" (Just (Str x)))
+            (store EmptyObject "0" (Just (Str (str.substr x 0 n)))))))
+
+(define-fun Split2 ((x String) (delim String)) Properties
+    (let ((n (str.indexof x delim 0)))
+        (ite (= n (- 1))
+            (store EmptyObject "0" (Just (Str x)))
+            (store
+                (store EmptyObject "0" (Just (Str (str.substr x 0 n))))
+                "1"
+                (Just (Str (str.substr
+                    x
+                    (+ n 1)
+                    (- (str.len x) (+ n 1)))))))))
+
+(define-fun js.split ((x String) (delim String) (maxSplits Int)) Properties
+    (ite (= 0 maxSplits)
+        EmptyObject
+        (ite (= 1 maxSplits) (Split1 x delim) (Split2 x delim))))
